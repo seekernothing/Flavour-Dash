@@ -1,27 +1,27 @@
 import RestaurantCard from "./RestaurantCard";
-
 import resObj from "../utils/constants";
+import { useState } from "react";
 
+const Body = () => {
+  let [resData, setResdata] = useState(resObj);
 
+  let ratingFiltering = () => {
+    let filteredData = resData.filter((res) => res.data.avgRating > 4);
+    setResdata(filteredData);
+  };
 
-
-let Body = () => {
   return (
     <div className="body">
       <div className="filter">
-        <button className="filter-btn" onClick={()=>{}}>Top Rated Restaurants</button>
+        <button className="filter-btn" onClick={ratingFiltering}>
+          Top Rated Restaurants
+        </button>
       </div>
+
       <div className="res-container">
-        {resObj.map((restaurant) => (
+        {resData.map((restaurant) => (
           <RestaurantCard key={restaurant.data.id} resData={restaurant} />
         ))}
-
-        {/* <RestaurantCard
-          resName="KFC"
-          cusine="Burger, Fries,Fast food"
-          ratings="4.1 stars"
-          deliverytime="20 minutes"
-        /> */}
       </div>
     </div>
   );
