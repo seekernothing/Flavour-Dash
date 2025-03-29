@@ -1,3 +1,7 @@
+body{
+  background-color: white;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -10,7 +14,11 @@
   z-index: 1;
 }
 .logo {
-  width: 80px;
+  width: 50px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left:3px;
+
 }
 
 .nav-items > ul {

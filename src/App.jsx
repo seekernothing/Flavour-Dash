@@ -18,15 +18,13 @@
 // -Adress
 // -Contact
 
+import logo from "./assets/logo.png";
+
 let Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img
-          className="logo"
-          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=fast-food&sf=&txt_keyword=All"
-          alt="Flavour Dash Logo"
-        />
+        <img className="logo" src={logo} alt="Flavour Dash Logo" />
       </div>
 
       <div className="nav-items">
@@ -41,9 +39,8 @@ let Header = () => {
   );
 };
 
-
-
-let RestaurantCard =()=>{
+let RestaurantCard = (props) => {
+  console.log(props)
   return (
     <div className="res-card">
       <img
@@ -52,45 +49,41 @@ let RestaurantCard =()=>{
         alt="Biryami"
       />
 
-      <h2>Meghna Foods</h2>
-      <h4>Biryani, North Indian, Asian</h4>
-      <h4>4.4 stars</h4>
-      <h4>38 minutes</h4>
+      <h2>{props.resName}</h2>
+      <h4>{props.cusine}</h4>
+      <h4>{props.ratings}</h4>
+      <h4>{props.deliverytime}</h4>
     </div>
   );
-}
+};
 
-let Body =()=>{
-  return(
+let Body = () => {
+  return (
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
-        <RestaurantCard/>
+        <RestaurantCard
+          resName="Meghna Foods"
+          cusine="Biryani, North Indian, Asian"
+          ratings="4.4 stars"
+          deliverytime="30 minutes"
+        />
+        <RestaurantCard
+          resName="KFC"
+          cusine="Burger, Fries,Fast food"
+          ratings="4.1 stars"
+          deliverytime="20 minutes"
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
 let App = () => {
   return (
     <div className="app">
       <Header />
-      <Body/>
-      
+      <Body />
     </div>
   );
 };
