@@ -33,7 +33,7 @@ body{
 
 .res-card {
   width: 200px;
-  height: 350px;
+  height: 400px;
   margin-left: 10px;
   margin-bottom: 10px;
   
@@ -68,4 +68,16 @@ body{
 .filter-btn{
   margin: 20px;
   cursor: pointer;
+}
+
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-cards{
+  margin: 20px;
+  width: 200px;
+  height: 400px;
+  background-color: gray;
 }

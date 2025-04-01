@@ -2,23 +2,21 @@ import { CDN_URL } from "../utils/Cdn";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
-
-  // Debug log to see the structure
-  console.log("Restaurant Data in Card:", resData);
+  const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =
+    resData.info;
 
   return (
     <div className="res-card">
       <img
         className="res-logo"
-        src={CDN_URL + resData.info.cloudinaryImageId}
-        alt={resData.info.name}
+        src={CDN_URL + cloudinaryImageId}
+        alt="Restaurant Image"
       />
-
-      <h2>{resData.info.name}</h2>
-      <h4>{resData.info.cuisines.join(", ")}</h4>
-      <h4>{resData.info.avgRating} stars</h4>
-      <h4>{resData.info.costForTwo}</h4>
-      <h4>{resData.info.sla.deliveryTime} minutes</h4>
+      <h2>{name}</h2>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{avgRating} stars</h4>
+      <h4>{costForTwo}</h4>
+      <h4>{sla.deliveryTime} minutes</h4>
     </div>
   );
 };
