@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "./assets/logo.png"
+import { Link } from "react-router-dom";
 
 let Header = () => {
 
@@ -13,11 +14,24 @@ let Header = () => {
 
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
           <li>Cart</li>
-          <button className="login" onClick={()=>login==="Login"?setLogin("Logout"):setLogin("Login")}>{login}</button>
+          <button
+            className="login"
+            onClick={() =>
+              login === "Login" ? setLogin("Logout") : setLogin("Login")
+            }
+          >
+            {login}
+          </button>
         </ul>
       </div>
     </div>
