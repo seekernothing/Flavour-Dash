@@ -40,6 +40,7 @@ body{
   background-color: #f0f0f0;
   
   padding: 10px;
+  border-radius: 10px;
 }
 
 .res-card:hover{
@@ -95,6 +96,7 @@ body{
   background-color: grey;
   
   padding: 10px;
+  border-radius: 10px;
 }
 .login{
  background-color: white;

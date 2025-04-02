@@ -7,6 +7,8 @@ const Body = () => {
   const [filteredres, setFilteredres] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  console.log("mil gaya")
+
   useEffect(() => {
     fetchData();
   }, []);
