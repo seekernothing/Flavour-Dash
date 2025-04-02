@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
+  const [filteredres, setFilteredres] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -22,6 +24,7 @@ const Body = () => {
           ?.restaurants || [];
 
       setResData(restaurants);
+      setFilteredres(restaurants);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -36,23 +39,45 @@ const Body = () => {
   //   return <Shimmer />;
   // }
 
-  return (
-    resData.length ===
-    0 ? <Shimmer/>:(
-      <div className="body">
-        <div className="filter">
-          <button className="filter-btn" onClick={ratingFiltering}>
-            Top Rated Restaurants
+  return resData.length === 0 ? (
+    <Shimmer />
+  ) : (
+    <div className="body">
+      <div className="filter">
+        <div className="searchbox-container">
+          <input
+            className="searchbox"
+            type="text"
+            placeholder="Search restaurants...."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="search-btn"
+            onClick={() => {
+              let filteredRes = resData.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+
+              setFilteredres(filteredRes);
+            }}
+          >
+            Search
           </button>
         </div>
-
-        <div className="res-container">
-          {resData.map((restaurant) => (
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-          ))}
-        </div>
+        <button className="filter-btn" onClick={ratingFiltering}>
+          Top Rated Restaurants
+        </button>
       </div>
-    )
+
+      <div className="res-container">
+        {filteredres.map((restaurant) => (
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        ))}
+      </div>
+    </div>
   );
 };
 

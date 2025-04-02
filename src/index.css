@@ -65,8 +65,19 @@ body{
   
 }
 
-.filter-btn{
+.filter{
+  display: flex;
+  gap: 10px;
   margin: 20px;
+  justify-content: center;
+}
+
+.searchbox{
+ 
+}
+
+.filter-btn{
+  /* margin: 20px; */
   cursor: pointer;
 }
 
@@ -76,8 +87,20 @@ body{
 }
 
 .shimmer-cards{
-  margin: 20px;
   width: 200px;
   height: 400px;
-  background-color: gray;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  
+  background-color: grey;
+  
+  padding: 10px;
+}
+.login{
+ background-color: white;
+ 
+ margin-right: 10px;
+ cursor: pointer;
+ padding: 1px;
+ border: 1px solid black;
 }
