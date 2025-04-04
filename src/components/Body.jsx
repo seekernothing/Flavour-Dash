@@ -77,7 +77,7 @@ const Body = () => {
         {filteredres.map((restaurant) => (
           <Link
             key={restaurant.info.id}
-            to={"/restaurants/" + restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
           >
             {" "}
             <RestaurantCard resData={restaurant} />

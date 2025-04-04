@@ -5,7 +5,6 @@ import { MENU_API_URL } from "../utils/Cdn";
 
 const RestaurantMenu = () => {
   const [resMenu, setResmenu] = useState(null);
-
   const { resId } = useParams();
 
   useEffect(() => {
@@ -23,18 +22,35 @@ const RestaurantMenu = () => {
     }
   };
 
-  if (!resMenu) return <Shimmer />; // Loader jab tak data na aaye
+  if (!resMenu) return <Shimmer />;
 
-  // ✅ **Safe destructuring**
-  const restaurantInfo = resMenu?.data?.cards?.[2]?.card?.card?.info || {};
+  // ✅ Extract all cards
+  const cards = resMenu?.data?.cards || [];
+
+  // ✅ Extract restaurant info card using @type
+  const restaurantInfoCard = cards.find(
+    (card) =>
+      card?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
+  );
+
+  const restaurantInfo = restaurantInfoCard?.card?.card?.info || {};
   const { name, cuisines, costForTwoMessage } = restaurantInfo;
 
-  // ✅ **Safe itemCards extraction**
-  const itemCardInfo =
-    resMenu?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[2]
-      ?.card?.card || {};
+  // ✅ Extract menu items from groupedCard REGULAR section
+  const regularCards =
+    resMenu?.data?.cards?.find(
+      (card) => card?.groupedCard?.cardGroupMap?.REGULAR
+    )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-  const itemCards = itemCardInfo.itemCards || [];
+  // ✅ Find first ItemCategory block (like "Recommended", "Rolls", etc.)
+  const itemCategoryCard = regularCards.find(
+    (card) =>
+      card?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
+
+  const itemCards = itemCategoryCard?.card?.card?.itemCards || [];
 
   return (
     <div className="menu">
