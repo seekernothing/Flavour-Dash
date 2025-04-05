@@ -4,7 +4,7 @@ const Contact = ()=>{
 
 
         <div>
-          <h1>My number is: +919743438484</h1>
+          <h1>My number is: +919743438484  💋💋💋</h1>
         </div>
     )
 }  

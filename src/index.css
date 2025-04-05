@@ -106,3 +106,17 @@ body{
  padding: 1px;
  border: 1px solid black;
 }
+
+.menu{
+
+  text-align: center;
+ 
+}
+
+.menu>li{
+   list-style-type: none;
+}
+
+.grocery{
+  text-align: center;
+}

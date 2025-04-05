@@ -7,11 +7,6 @@ import { Outlet } from "react-router-dom";
 
 
 
-
-
-// swiggy api data for restaurants
-
-
 let App = () => {
   return (
     <div className="app">
