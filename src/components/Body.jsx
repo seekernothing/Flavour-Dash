@@ -41,17 +41,17 @@ const Body = () => {
   //   return <Shimmer />;
   // }
 
-const onlineStatus = useOnlineStatus();
+  const onlineStatus = useOnlineStatus();
 
-if(onlineStatus===false) return <h1>Looks like you are offline. check your internet connection</h1>
-
+  if (onlineStatus === false)
+    return <h1>Looks like you are offline. check your internet connection</h1>;
 
   return resData.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="searchbox-container  m-2 p-2">
+      <div className="filter flex justify-center">
+        <div className="searchbox-container  m-2 p-2 ">
           <input
             className="searchbox border-solid border-black"
             type="text"
@@ -62,7 +62,7 @@ if(onlineStatus===false) return <h1>Looks like you are offline. check your inter
             }}
           />
           <button
-            className="search-btn mr-1 bg-green-400 px-4 rounded-xl"
+            className="search-btn mr-1 bg-green-400 px-4 rounded-xl cursor-pointer ml-2"
             onClick={() => {
               let filteredRes = resData.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -74,12 +74,18 @@ if(onlineStatus===false) return <h1>Looks like you are offline. check your inter
             Search
           </button>
         </div>
-        <button className="filter-btn" onClick={ratingFiltering}>
-          Top Rated Restaurants
-        </button>
+        <div className="flex items-center">
+          {" "}
+          <button
+            className="filter-btn mr-1  px-4 rounded-xl cursor-pointer ml-2 bg-gray-200"
+            onClick={ratingFiltering}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
 
-      <div className="res-container">
+      <div className="res-container flex flex-wrap justify-center">
         {filteredres.map((restaurant) => (
           <Link
             key={restaurant.info.id}
