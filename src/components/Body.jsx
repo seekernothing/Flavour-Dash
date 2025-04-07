@@ -51,9 +51,9 @@ if(onlineStatus===false) return <h1>Looks like you are offline. check your inter
   ) : (
     <div className="body">
       <div className="filter">
-        <div className="searchbox-container">
+        <div className="searchbox-container  m-2 p-2">
           <input
-            className="searchbox"
+            className="searchbox border-solid border-black"
             type="text"
             placeholder="Search restaurants...."
             value={searchText}
@@ -62,7 +62,7 @@ if(onlineStatus===false) return <h1>Looks like you are offline. check your inter
             }}
           />
           <button
-            className="search-btn"
+            className="search-btn mr-1 bg-green-400 px-4 rounded-xl"
             onClick={() => {
               let filteredRes = resData.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
