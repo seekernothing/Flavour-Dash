@@ -9,6 +9,8 @@ const Body = () => {
   const [filteredres, setFilteredres] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -92,6 +94,11 @@ const Body = () => {
             to={"/restaurant/" + restaurant.info.id}
           >
             {" "}
+
+            {/* if the restaurant is promoted add a promoted label */}
+
+            
+
             <RestaurantCard resData={restaurant} />
           </Link>
         ))}
@@ -99,5 +106,9 @@ const Body = () => {
     </div>
   );
 };
+
+// Higher order component:
+
+
 
 export default Body;

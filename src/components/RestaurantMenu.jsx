@@ -110,26 +110,34 @@ const RestaurantMenu = () => {
   );
 
   return (
-    <div className="menu text-center ">
-      <div className="mb-5">
-        <h1 className="text-5xl font-extrabold mb-4 underline ">{name}</h1>
-        <h3>{cuisines?.join(", ")}</h3>
+    <div className="text-center  ">
+      <div>
+        <h1 className="text-2xl font-extrabold my-10 underline">{name}</h1>
+        <p className="font-bold text-lg">{cuisines?.join(", ")}</p>
         <h4>{costForTwoMessage}</h4>
-        <h2 className="my-5">Menu</h2>
+        <h2>Menu</h2>
       </div>
       {allItemCategories.map((category) => (
-        <div className="border-2 border-solid border-black rounded-2xl mb-6 w-1/2 justify-center ml-90 p-4" key={category.card.card.title}>
-          <h3 className="text-2xl font-bold underline mb-6">
-            {category.card.card.title}
-          </h3>
-          <ul>
-            {category.card.card.itemCards?.map((item) => (
-              <li key={item.card.info.id}>
-                {item.card.info.name} - ₹
-                {(item.card.info.price || item.card.info.defaultPrice) / 100}
-              </li>
-            ))}
-          </ul>
+        <div key={category.card.card.title}>
+          <div className=" bg-gray-50 shadow-lg p-4 w-6/12 mx-auto my-4 ">
+            <div className="flex justify-between">
+              <span className="font-extrabold">
+                <h3>
+                  {category.card.card.title} (
+                  {category.card.card.itemCards.length})
+                </h3>
+              </span>
+              <span>⬇️</span>{" "}
+            </div>
+            <ul>
+              {category.card.card.itemCards?.map((item) => (
+                <li key={item.card.info.id}> 
+                  {item.card.info.name} - ₹
+                  {(item.card.info.price || item.card.info.defaultPrice) / 100}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
     </div>

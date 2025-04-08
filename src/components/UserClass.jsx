@@ -4,9 +4,9 @@ class UserClass extends React.Component {
     super(props);
     this.state = {
       userInfo: {
-        name: "Dummy",
-        location: "default",
-        avatar_url:"dummy url"
+        // name: "Dummy",
+        // location: "default",
+        // avatar_url:"dummy url"
       },
     };
   }
