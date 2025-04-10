@@ -8,8 +8,8 @@ class About extends React.Component {
   render() {
     return (
       <div>
-        <h1>About</h1>
-        <h2>This is a about component</h2>
+       
+        <h2 className="text-center mt-10">This is a about component</h2>
         <UserClass
           name={"Abhishek Biradar"}
           location={"Pune"}

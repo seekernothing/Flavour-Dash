@@ -1,94 +1,19 @@
-// // import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import Shimmer from "./Shimmer";
-// // import { MENU_API_URL } from "../utils/Cdn";
-// import useRestaurantMenu from "../utils/useRestaurantMenu";
-
-// const RestaurantMenu = () => {
-//   // const [resMenu, setResmenu] = useState(null);
-//   const { resId } = useParams();
-
-//   const resMenu = useRestaurantMenu(resId);
-
-//   // useEffect(() => {
-//   //   fetchMenu();
-//   // }, []);
-
-//   // const fetchMenu = async () => {
-//   //   try {
-//   //     const data = await fetch(MENU_API_URL(resId));
-//   //     const json = await data.json();
-//   //     setResmenu(json);
-//   //     console.log(json); // Debugging ke liye
-//   //   } catch (error) {
-//   //     console.error("Error fetching menu:", error);
-//   //   }
-//   // };
-
-//   if (!resMenu) return <Shimmer />;
-
-//   // ✅ Extract all cards
-//   // const cards = resMenu?.data?.cards || [];
-//   const cards = resMenu?.cards || [];
-
-//   // ✅ Extract restaurant info card using @type
-//   const restaurantInfoCard = cards.find(
-//     (card) =>
-//       card?.card?.card?.["@type"] ===
-//       "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
-//   );
-
-//   const restaurantInfo = restaurantInfoCard?.card?.card?.info || {};
-//   const { name, cuisines, costForTwoMessage } = restaurantInfo;
-
-//   // ✅ Extract menu items from groupedCard REGULAR section
-//   const regularCards =
-//     resMenu?.data?.cards?.find(
-//       (card) => card?.groupedCard?.cardGroupMap?.REGULAR
-//     )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-
-//   // ✅ Find first ItemCategory block (like "Recommended", "Rolls", etc.)
-//   const itemCategoryCard = regularCards.find(
-//     (card) =>
-//       card?.card?.card?.["@type"] ===
-//       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-//   );
-
-//   const itemCards = itemCategoryCard?.card?.card?.itemCards || [];
-
-//   return (
-//     <div className="menu">
-//       <h1>{name || "Restaurant Name Not Found"}</h1>
-//       <h3>{cuisines?.join(", ") || "Cuisines not available"}</h3>
-//       <h4>{costForTwoMessage || "Price not available"}</h4>
-
-//       <h2>Menu</h2>
-//       <ul>
-//         {itemCards.map((item, index) => (
-//           <li key={item?.card?.info?.id || index}>
-//             {item?.card?.info?.name} - ₹{item?.card?.info?.price / 100}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default RestaurantMenu;
-
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { CDN_URL } from "../utils/Cdn";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resMenu = useRestaurantMenu(resId);
 
+  const [expandedIndex, setExpandedIndex] = useState(null); //  For accordion
+
   if (!resMenu) return <Shimmer />;
 
   const cards = resMenu?.cards || [];
 
-  // Get Restaurant Info
   const restaurantInfoCard = cards.find(
     (card) =>
       card?.card?.card?.["@type"] ===
@@ -97,47 +22,82 @@ const RestaurantMenu = () => {
   const restaurantInfo = restaurantInfoCard?.card?.card?.info || {};
   const { name, cuisines, costForTwoMessage } = restaurantInfo;
 
-  // Get REGULAR section safely
   const regularCardSection =
     cards.find((card) => card?.groupedCard?.cardGroupMap?.REGULAR)?.groupedCard
       ?.cardGroupMap?.REGULAR?.cards || [];
 
-  // Get ALL itemCategories (Recommended, Desserts etc.)
   const allItemCategories = regularCardSection.filter(
     (card) =>
       card?.card?.card["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
 
+  const toggleCategory = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
-    <div className="text-center  ">
+    <div className="text-center">
       <div>
         <h1 className="text-2xl font-extrabold my-10 underline">{name}</h1>
         <p className="font-bold text-lg">{cuisines?.join(", ")}</p>
         <h4>{costForTwoMessage}</h4>
-        <h2>Menu</h2>
+        <h2 className="my-4 text-xl font-bold">Menu</h2>
       </div>
-      {allItemCategories.map((category) => (
-        <div key={category.card.card.title}>
-          <div className=" bg-gray-50 shadow-lg p-4 w-6/12 mx-auto my-4 ">
-            <div className="flex justify-between">
-              <span className="font-extrabold">
-                <h3>
-                  {category.card.card.title} (
-                  {category.card.card.itemCards.length})
-                </h3>
-              </span>
-              <span>⬇️</span>{" "}
-            </div>
-            <ul>
+
+      {allItemCategories.map((category, index) => (
+        <div
+          key={category.card.card.title}
+          className="bg-gray-50 shadow-lg p-4 w-6/12 mx-auto my-4 rounded-xl"
+        >
+          {/* Title Row */}
+          <div
+            className="flex justify-between cursor-pointer font-bold text-left"
+            onClick={() => toggleCategory(index)}
+          >
+            <span>
+              {category.card.card.title} ({category.card.card.itemCards.length})
+            </span>
+            <span>{expandedIndex === index ? "⬆️" : "⬇️"}</span>
+          </div>
+
+          {/* Accordion Content */}
+          {expandedIndex === index && (
+            <ul className="mt-4">
               {category.card.card.itemCards?.map((item) => (
-                <li key={item.card.info.id}> 
-                  {item.card.info.name} - ₹
-                  {(item.card.info.price || item.card.info.defaultPrice) / 100}
+                <li
+                  className="p-2 m-2 border-black border-b-2 text-left"
+                  key={item.card.info.id}
+                >
+                  <div className="flex p-2">
+                    <div>
+                      <img
+                        className="w-30 rounded-2xl"
+                        src={CDN_URL + item.card.info.imageId}
+                        alt={item.card.info.name}
+                      />
+                    </div>
+                    <div className="mt-5 p-6">
+                      <span className="px-2 font-bold">
+                        {item.card.info.name}
+                      </span>
+                      <span>
+                        - ₹
+                        {(item.card.info.price || item.card.info.defaultPrice) /
+                          100}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-xs">{item.card.info.description}</p>
+                  <span>
+                    <button className="mt-4 rounded-2xl p-3 bg-yellow-200 font-bold cursor-default hover:cursor-pointer">
+                      add to cart +
+                    </button>
+                  </span>
                 </li>
               ))}
             </ul>
-          </div>
+          )}
         </div>
       ))}
     </div>

@@ -26,15 +26,20 @@ class UserClass extends React.Component {
   }
 
   render() {
-    const { name, bio,avatar_url} = this.state.userInfo;
+    const { name, bio, avatar_url, login } = this.state.userInfo;
 
     return (
-      <div className="user">
-      <img alt="avtar" src={avatar_url} />
-        <h2>Name:{name}</h2>
+      <div className="user flex mt-20 gap-20 justify-center">
+        <div>
+          {" "}
+          <img alt="avtar" className="w-80 rounded-2xl" src={avatar_url} />
+        </div>
+        <div className="mt-20">
+          <h2>NAME: {name}</h2>
+          <h2>AKA: {login}</h2>
 
-        <h3>Bio:{bio}</h3>
-        
+          <h3>BIO: {bio}</h3>
+        </div>
       </div>
     );
   }
