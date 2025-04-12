@@ -1,15 +1,16 @@
-import { useState,useContext } from "react";
-import logo from "./assets/logo.png"
+import { useState, useContext } from "react";
+import logo from "./assets/logo.png";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 let Header = () => {
-
-  let [login, setLogin] = useState("Login")
-  const onlineStatus = useOnlineStatus()
-  const{ loggedInUser } = useContext(UserContext)
-  
+  let [login, setLogin] = useState("Login");
+  const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
+  //subscribing to the store using selector
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between shadow-lg rounded-xl p-4 mb-1 sticky top-0 z-50 bg-white mt-4">
@@ -33,7 +34,7 @@ let Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
-            Cart
+            Cart - ({cartItems.length})
           </li>
           <button
             className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out"

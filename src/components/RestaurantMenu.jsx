@@ -3,11 +3,13 @@ import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { CDN_URL } from "../utils/Cdn";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItems } from "../utils/CartSlice";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resMenu = useRestaurantMenu(resId);
-
+  const dispatch = useDispatch();
   const [expandedIndex, setExpandedIndex] = useState(null); //  For accordion
 
   if (!resMenu) return <Shimmer />;
@@ -36,6 +38,9 @@ const RestaurantMenu = () => {
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const handelAddItem = (item) => {
+    dispatch(addItems(item));
+  };
   return (
     <div className="text-center">
       <div>
@@ -90,7 +95,10 @@ const RestaurantMenu = () => {
                   </div>
                   <p className="mt-2 text-xs">{item.card.info.description}</p>
                   <span>
-                    <button className="mt-4 rounded-2xl p-3 bg-yellow-200 font-bold cursor-default hover:cursor-pointer">
+                    <button
+                      onClick={() => handelAddItem(item)}
+                      className="mt-4 rounded-2xl p-3 bg-yellow-200 font-bold cursor-default hover:cursor-pointer"
+                    >
                       add to cart +
                     </button>
                   </span>
