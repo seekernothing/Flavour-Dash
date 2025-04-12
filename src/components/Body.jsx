@@ -55,7 +55,7 @@ const Body = () => {
       <div className="filter flex justify-center">
         <div className="searchbox-container  m-2 p-2 ">
           <input
-            className="searchbox border-solid border-black"
+            className="searchbox border-2 border-black rounded-lg px-2"
             type="text"
             placeholder="Search restaurants...."
             value={searchText}
