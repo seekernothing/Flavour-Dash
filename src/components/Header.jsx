@@ -9,7 +9,6 @@ let Header = () => {
   let [login, setLogin] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
-  //subscribing to the store using selector
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
@@ -21,31 +20,30 @@ let Header = () => {
       <div className="nav-items">
         <ul className="flex p-5 space-x-4 items-center ">
           <li>Online Status : {onlineStatus ? "🟢" : "🔴"}</li>
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
             <Link to="/">Home</Link>
           </li>
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
-            Cart - ({cartItems.length})
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
+            <Link to="/cart">Cart - ({cartItems.length})</Link>
           </li>
           <button
-            className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out"
+            className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl"
             onClick={() =>
               login === "Login" ? setLogin("Logout") : setLogin("Login")
             }
           >
             {login}
           </button>
-
-          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl transition-all delay-100 duration-300 ease-in-out">
+          <li className="cursor-pointer hover:bg-amber-100 px-2 py-2 rounded-2xl">
             {loggedInUser}
           </li>
         </ul>

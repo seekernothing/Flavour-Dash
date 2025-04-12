@@ -38,9 +38,10 @@ const RestaurantMenu = () => {
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const handelAddItem = (item) => {
+  const handleAddItem = (item) => {
     dispatch(addItems(item));
   };
+
   return (
     <div className="text-center">
       <div>
@@ -96,10 +97,10 @@ const RestaurantMenu = () => {
                   <p className="mt-2 text-xs">{item.card.info.description}</p>
                   <span>
                     <button
-                      onClick={() => handelAddItem(item)}
+                      onClick={() => handleAddItem(item)}
                       className="mt-4 rounded-2xl p-3 bg-yellow-200 font-bold cursor-default hover:cursor-pointer"
                     >
-                      add to cart +
+                      Add to Cart +
                     </button>
                   </span>
                 </li>

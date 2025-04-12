@@ -15,6 +15,7 @@ import RestaurantMenu from "./components/RestaurantMenu.jsx";
 // import Grocery from './components/Grocery.jsx';
 
 import { lazy, Suspense } from "react";
+import Cart from "./components/Cart.jsx";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -52,6 +53,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },
     ],
     errorElement: <Error />,
