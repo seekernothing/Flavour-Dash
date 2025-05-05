@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeItems, clearCart } from "../utils/CartSlice";
-import { CDN_URL } from "../utils/Cdn";
+import { CDN_URL, MENU_API_URL } from "../utils/CDN"; // ✅ sahi (case match)
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
