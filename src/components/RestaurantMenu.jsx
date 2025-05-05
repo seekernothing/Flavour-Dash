@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import { CDN_URL } from "../utils/Cdn";
+import { CDN_URL, MENU_API_URL } from "../utils/CDN"; // 
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItems } from "../utils/CartSlice";

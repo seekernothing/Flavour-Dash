@@ -23,7 +23,7 @@
 
 
 import { useEffect, useState } from "react";
-import { MENU_API_URL } from "./Cdn";
+import { MENU_API_URL } from "./CDN";
 
 const useRestaurantMenu = (resId) => {
   const [resMenu, setResmenu] = useState(null);

@@ -1,4 +1,4 @@
-import { CDN_URL } from "../utils/Cdn";
+import { CDN_URL} from "../utils/CDN"; //
 
 const RestaurantCard = (props) => {
   const { resData } = props;
@@ -25,7 +25,5 @@ const RestaurantCard = (props) => {
 
 // input-->restaurantcard
 // output--> restaurantcardpromoted
-
-
 
 export default RestaurantCard;
