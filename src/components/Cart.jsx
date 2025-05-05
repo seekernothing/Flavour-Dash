@@ -67,9 +67,9 @@ const Cart = () => {
             <h2 className="text-xl font-bold">Total: ₹{totalPrice / 100}</h2>
             <button
               onClick={handleClear}
-              className="mt-4 bg-red-400 text-white p-3 rounded-xl font-bold hover:bg-red-500 transition-all"
+              className="mt-4 bg-black text-white p-3 rounded-xl font-bold hover:bg-red-500 transition-all cursor-pointer"
             >
-              Clear Cart 🧹
+              Clear Cart 🛒
             </button>
           </div>
         </>
