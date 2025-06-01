@@ -21,9 +21,6 @@ const RestaurantCard = (props) => {
   );
 };
 
-//Higher order component:
 
-// input-->restaurantcard
-// output--> restaurantcardpromoted
 
 export default RestaurantCard;
